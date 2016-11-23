@@ -1,0 +1,52 @@
+#!/bin/bash
+# using the case and function command
+
+t=`date +"%H%M"`
+d=`date`
+f1=file1.txt
+f2=file2.txt
+f3=file3.txt
+f4=file4.txt
+
+function received {
+echo  "$d : $1 has been received at `ls -ltr | grep $1 | awk '{print $6, $7, $8}'`." >> out.html
+}
+
+function notreceived {
+echo  "$d : $1 not received yet, Please check." >> out.html
+}
+
+case $t in
+
+0835)
+	if [ -e "$f1" ]
+        then
+            received "$f1"
+    else
+            notreceived "$f1"
+    fi
+
+    if [ -e "$f2" ]
+        then
+            received "$f2"
+    else
+            notreceived "$f2"
+    fi
+
+0935)
+    if [ -e "$f3" ]
+        then
+            received "$f3"
+    else
+            notreceived "$f3"
+    fi
+
+1005)
+    if [ -e "$f4" ]
+        then
+            received "$f4"
+    else
+            notreceived "$f4"
+    fi
+
+esac
